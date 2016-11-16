@@ -22,7 +22,6 @@ Once the installation has completed, you can access functionality via the ``tank
 for that project or run :meth:`sgtk.sgtk_from_entity()` or :meth:`sgtk.sgtk_from_path()`
 in order to create an API session.
 
-
 Bootstrapping Toolkit
 ----------------------------------------
 
@@ -79,4 +78,30 @@ Exception Classes
 
 .. autoclass:: TankBootstrapError
 
+
+Installing the sgtk module using pip
+----------------------------------------
+
+When running Toolkit using the bootstrap API above, you need access to the :class:`ToolkitManager`
+class in order to kickstart the bootstrap process. Once you have started the bootstrap, toolkit will
+download all the necessary components for the given configuration you are bootstrapping into,
+potentially even including a different version of the core API than you are using to bootstrap with.
+
+In order to fully automate this process programatically, you need an ``sgtk`` instance to begin with.
+One way to accomplish this is to use ``pip`` (see https://pip.pypa.io/). Use the following syntax::
+
+    pip install git+https://github.com/shotgunsoftware/tk-core@v0.18.35
+
+
+If you want to add an sgtk core to a ``requirements.txt`` file, use the following syntax::
+
+    git+https://github.com/shotgunsoftware/tk-core@v0.18.35
+
+.. warning:: In order to use ``pip``, you currently need to have the git executable installed
+             on the system that you are deploying to.
+
+.. warning:: We strongly recommend always providing a version number. Not providing a version
+             number will currently download the latest commit from the master branch and
+             associate it with the highest available version number tag. Such downloads are
+             likely to contain changes which have not yet been full tested.
 
