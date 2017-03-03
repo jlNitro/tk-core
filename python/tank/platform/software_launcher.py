@@ -238,7 +238,8 @@ class SoftwareLauncher(object):
 
         :returns: :class:`logging.Logger` instance
         """
-        return LogManager.get_logger("env.%s.%s.startup" %
+        return LogManager.get_logger(
+            "env.%s.%s.startup" %
             (self.__environment.name, self.__engine_name)
         )
 
@@ -284,7 +285,6 @@ class SoftwareLauncher(object):
             ["15.5.324", "16.0.1.322"]
         """
         return self._versions
-
 
     ##########################################################################################
     # abstract methods
@@ -533,7 +533,7 @@ class SoftwareVersion(object):
     Container class that stores properties of a DCC that
     are useful for Toolkit Engine Startup functionality.
     """
-    def __init__(self, version, product, path, icon=None):
+    def __init__(self, version, product, path, icon=None, arguments=None):
         """
         Constructor.
 
@@ -545,11 +545,14 @@ class SoftwareVersion(object):
         :param str icon: (optional) Full path to a 256x256 (or smaller)
                          png file to use for graphical displays of
                          this SoftwareVersion.
+        :param list arguments: (optional) List of command line arguments
+                               that need to be passed down to the DCC.
         """
         self._version = version
         self._product = product
         self._path = path
         self._icon_path = icon
+        self._arguments = arguments or []
 
     def __repr__(self):
         """
@@ -610,6 +613,15 @@ class SoftwareVersion(object):
         :returns: String path
         """
         return self._icon_path
+
+    @property
+    def arguments(self):
+        """
+        Command line arguments required to launch the DCC.
+
+        :returns: List of string arguments.
+        """
+        return self._arguments
 
 
 class LaunchInformation(object):
